@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from "../../components/Header/Header";
 import {NavLink} from "react-router-dom";
-import {REGISTRATION_ROUTE} from "../../routing/paths";
+import {LOGIN_ROUTE} from "../../routing/paths";
 import Footer from "../../components/Footer/Footer";
 
-const LoginPage = () => {
+const RegistrationPage = () => {
     return (
         <>
-        <Header/>
+            <Header/>
 
             <div>
                 LOGIN
@@ -30,14 +30,14 @@ const LoginPage = () => {
                 />
             </div>
             <div>
-                No account?
-                <NavLink to={REGISTRATION_ROUTE}>Sign up!</NavLink>
+                Have account?
+                <NavLink to={LOGIN_ROUTE}>Sign in!</NavLink>
             </div>
-            <button>LOGIN</button>
+            <button>REGISTRATION</button>
 
             <Footer/>
         </>
     );
 };
 
-export default LoginPage;
+export default RegistrationPage;

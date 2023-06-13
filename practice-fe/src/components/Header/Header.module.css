@@ -1,0 +1,31 @@
+.headerBlock {
+
+    font-family: 'Abel';
+    font-size: 18px;
+
+
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 2px solid #E5E5EA;
+    height: 50px;
+    position: relative;
+}
+
+.headerComponent {
+    margin-left: 10px;
+    margin-bottom: 12px;
+    padding: 8px;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.headerLogo {
+    margin-left: 10px;
+    margin-bottom: 12px;
+    position: absolute;
+    left: 20px;
+}
+
