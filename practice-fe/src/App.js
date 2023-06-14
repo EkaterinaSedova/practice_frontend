@@ -1,10 +1,13 @@
 import {BrowserRouter} from "react-router-dom";
 import AppRouter from "./routing/AppRouter";
+import Auth from "./auth";
 
 function App() {
   return (
       <BrowserRouter>
-          <AppRouter/>
+          <Auth>
+              <AppRouter/>
+          </Auth>
       </BrowserRouter>
   );
 }

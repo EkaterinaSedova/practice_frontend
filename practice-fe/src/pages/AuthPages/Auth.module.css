@@ -37,6 +37,9 @@
 }
 
 .btn {
+
+    cursor: pointer;
+
     margin: 10px;
     font-family: Abel;
     font-size: 22px;
