@@ -2,13 +2,20 @@ import React from 'react';
 import styles from './Header.module.css'
 
 const Header = () => {
+    const isAuth = false;
     return (
-            <ul className={styles.headerBlock}>
-                <li className={styles.headerLogo}>superprikol</li>
-                <li className={styles.headerComponent}>prikol2</li>
-                <li className={styles.headerComponent}>prikol3</li>
-                <li className={styles.headerComponent}>login</li>
-            </ul>
+        <header className={styles.headerBlock}>
+            <div className={styles.headerLogo}>SUPER NAME</div>
+            <div className={styles.headerComponent}>
+                {isAuth ?
+                    <p>exit</p>
+                    :
+                    <p>login</p>
+                }
+
+            </div>
+        </header>
+
     );
 };
 

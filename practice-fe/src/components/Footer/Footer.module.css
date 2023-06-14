@@ -9,7 +9,7 @@
     align-items: center;
 
     border-top: 2px solid #E5E5EA;
-    height: 50px;
+    height: 30px;
     position: absolute;
     bottom: 0;
     width: 96%;
@@ -17,7 +17,6 @@
 
 .footerComponent {
     margin-left: 10px;
-    margin-bottom: 12px;
     padding: 8px;
     cursor: pointer;
     border-radius: 10px;
