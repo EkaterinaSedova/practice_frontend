@@ -1,7 +1,7 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {authRoutes, publicRoutes} from "./routes";
-import {LOGIN_ROUTE, MAIN_ROUTE} from "./paths";
+import {LOGIN_ROUTE} from "./paths";
 import {useAuth} from "../auth";
 
 const AppRouter = () => {

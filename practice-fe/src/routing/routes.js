@@ -13,11 +13,12 @@ export const publicRoutes = [
         path: REGISTRATION_ROUTE,
         Component: RegistrationPage,
     },
-]
-
-export const authRoutes = [
     {
         path: MAIN_ROUTE,
         Component: MainPage,
     },
+]
+
+export const authRoutes = [
+
 ]

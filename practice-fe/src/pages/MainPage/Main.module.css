@@ -1,0 +1,10 @@
+body {
+    font-family: Abel;
+}
+
+.container {
+    max-width: 1000px;
+    padding: 0px 30px;
+    margin: 0 auto;
+    justify-content: center;
+}

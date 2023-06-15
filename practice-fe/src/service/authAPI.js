@@ -1,7 +1,6 @@
 import {$host} from "./index";
 
 export const loginUser = async (email, password) => {
-    console.log(email, " ", password)
     const {data} = await $host.post('auth/login', {
         email: email,
         password: password,
@@ -18,4 +17,10 @@ export const registerUser = async (email, password, firstname, lastname) => {
         lastname: lastname
     })
     localStorage.setItem('token', data.token)
+}
+
+export const getUserById = async (id) => {
+    const {data} = await $host.get('users/' + id)
+    console.log("hi from authAPI", data)
+    return data;
 }

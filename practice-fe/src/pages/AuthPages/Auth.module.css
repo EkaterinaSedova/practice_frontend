@@ -1,6 +1,10 @@
+body {
+    font-family: Abel;
+}
+
 .textBlock {
     margin-top: 25px;
-    font-family: Abel;
+
     font-size: 26px;
     line-height: 28px;
     display: flex;
@@ -10,7 +14,6 @@
 
 .littleTextBlock {
     margin-top: 10px;
-    font-family: Abel;
     font-size: 16px;
     line-height: 18px;
     display: flex;
@@ -23,7 +26,6 @@
     font-size: 26px;
     width: 100%;
     box-sizing:border-box;
-    font-family: Abel;
     display: flex;
     border: 1px solid #818182;
     border-radius: 10px;
@@ -41,7 +43,6 @@
     cursor: pointer;
 
     margin: 10px;
-    font-family: Abel;
     font-size: 22px;
     background: #4776a1;
     border-radius: 10px;
