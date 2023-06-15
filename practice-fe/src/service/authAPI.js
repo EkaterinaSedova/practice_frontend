@@ -21,6 +21,5 @@ export const registerUser = async (email, password, firstname, lastname) => {
 
 export const getUserById = async (id) => {
     const {data} = await $host.get('users/' + id)
-    console.log("hi from authAPI", data)
     return data;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Header.module.css'
 import {useAuth} from "../../auth";
 import {useNavigate} from "react-router-dom";
-import {LOGIN_ROUTE} from "../../routing/paths";
+import {LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE} from "../../routing/paths";
 
 const Header = () => {
     const {isAuth} = useAuth();
@@ -13,10 +13,10 @@ const Header = () => {
 
     return (
         <header className={styles.headerBlock}>
-            <div className={styles.headerLogo}>SUPER NAME</div>
+            <div className={styles.headerLogo} onClick={() => navigate(MAIN_ROUTE)}>SUPER NAME</div>
             <div>
                 {isAuth ?
-                    <p>{currentUser}</p>
+                    <p onClick={() => navigate(PROFILE_ROUTE)}>{currentUser.firstname + ' ' + currentUser.lastname}</p>
                     :
                     <></>
                 }

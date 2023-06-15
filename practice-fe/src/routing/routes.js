@@ -1,7 +1,8 @@
-import {LOGIN_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE} from "./paths";
+import {LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE} from "./paths";
 import LoginPage from "../pages/AuthPages/LoginPage";
 import RegistrationPage from "../pages/AuthPages/RegistrationPage";
 import MainPage from "../pages/MainPage/MainPage";
+import ProfilePage from "../pages/ProfilePage/ProfilePage";
 
 
 export const publicRoutes = [
@@ -20,5 +21,8 @@ export const publicRoutes = [
 ]
 
 export const authRoutes = [
-
+    {
+        path: PROFILE_ROUTE,
+        Component: ProfilePage
+    }
 ]
