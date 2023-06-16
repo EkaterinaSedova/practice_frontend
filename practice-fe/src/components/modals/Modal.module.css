@@ -5,6 +5,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,6 +14,7 @@
 .modalContent {
     width: 500px;
     background-color: white;
+    border-radius: 10px;
 }
 
 .modalTitle {

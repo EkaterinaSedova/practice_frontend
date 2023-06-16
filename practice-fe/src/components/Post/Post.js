@@ -1,7 +1,12 @@
 import React from 'react';
 import styles from './Post.module.css'
+import {deletePost} from "../../service/postAPI";
 
 const Post = ({post}) => {
+
+    const handleDelete = () => {
+        const data = deletePost(post.id);
+    }
     const parseTimestamp = (unixTime) => {
         const date = new Date(unixTime); // Преобразуем unix время в объект Date
         let hours = date.getHours(); // Получаем часы
@@ -18,7 +23,6 @@ const Post = ({post}) => {
 
         let timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes}${ampm} `; // Собираем строку времени
         timeString += `${day} ${monthNames[month]} ${year}`
-        console.log(timeString)
         return timeString
 
     }
@@ -29,6 +33,7 @@ const Post = ({post}) => {
             {post.images.map((image) =>
                 <img key={image} width={400} height={400} src={process.env.REACT_APP_API_URL + image}/>
             )}
+            <button onClick={() => handleDelete()}>Delete this post</button>
         </div>
     );
 };

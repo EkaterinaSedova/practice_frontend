@@ -8,6 +8,10 @@ export const fetchPosts = async () => {
 
 export const fetchPostsByUser = async (id) => {
         const {data} = await $auth_host.get('/posts/user/' + id);
-        console.log('hi from postAPI', data)
         return data;
+}
+
+export const deletePost = async (id) => {
+        const {data} = await $auth_host.delete('/posts', {data: {post_id: id}})
+        console.log(data)
 }
