@@ -3,10 +3,13 @@ import Header from "../../components/Header/Header";
 import {useAuth} from "../../auth";
 import {fetchPostsByUser} from "../../service/postAPI";
 import Post from "../../components/Post/Post";
+import EditProfile from "../../components/modals/EditProfile";
 
 const ProfilePage = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const [editModalVisible, setEditModalVisible] = useState(false)
 
     const {currentUser} = useAuth();
 
@@ -27,6 +30,9 @@ const ProfilePage = () => {
                 <p>Last Name: {currentUser.lastname}</p>
                 <p>Sex: {currentUser.sex}</p>
             </div>
+            <div>
+                <button onClick={() => setEditModalVisible(true)}>Update my info</button>
+            </div>
             {loading ?
                 <div>loading posts...</div>
                 :
@@ -35,6 +41,10 @@ const ProfilePage = () => {
                 </>
 
             }
+            <EditProfile
+                show={editModalVisible}
+                onClose={() => setEditModalVisible(false)}
+            />
         </>
 
     );

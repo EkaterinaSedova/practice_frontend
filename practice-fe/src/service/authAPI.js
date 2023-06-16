@@ -18,8 +18,3 @@ export const registerUser = async (email, password, firstname, lastname) => {
     })
     localStorage.setItem('token', data.token)
 }
-
-export const getUserById = async (id) => {
-    const {data} = await $host.get('users/' + id)
-    return data;
-}
