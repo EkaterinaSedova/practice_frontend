@@ -6,7 +6,7 @@ import {useAuth} from "../../auth";
 const Post = ({post}) => {
     const {currentUser} = useAuth();
     const handleDelete = () => {
-        if(post.user_id === currentUser.id) deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
+        if(post.author.id === currentUser.id) deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
         else alert("У вас нет прав на удаление данного поста.")
     }
     const parseTimestamp = (unixTime) => {
@@ -30,6 +30,11 @@ const Post = ({post}) => {
     }
     return (
         <div className={styles.container}>
+            <div className={styles.userName}>
+                <img width={40} height={40} src={process.env.REACT_APP_API_URL + post.author.profile_img}/>
+                <p>{post.author.firstname + ' ' + post.author.lastname}</p>
+            </div>
+
             <p>{parseTimestamp(post.createdAt)}</p>
             <p>{post.content}</p>
             {post.images.map((image) =>

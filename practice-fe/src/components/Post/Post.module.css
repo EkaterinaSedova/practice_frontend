@@ -10,3 +10,7 @@
     margin-top: 100px;
 }
 
+.userName {
+    display: flex;
+    margin: 5px 5px;
+}
