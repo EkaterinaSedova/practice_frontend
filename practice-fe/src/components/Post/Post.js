@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './Post.module.css'
 import {deletePost} from "../../service/postAPI";
+import {useAuth} from "../../auth";
 
 const Post = ({post}) => {
-
+    const {currentUser} = useAuth();
     const handleDelete = () => {
-        const data = deletePost(post.id);
+        if(post.user_id === currentUser.id) deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
+        else alert("У вас нет прав на удаление данного поста.")
     }
     const parseTimestamp = (unixTime) => {
         const date = new Date(unixTime); // Преобразуем unix время в объект Date
