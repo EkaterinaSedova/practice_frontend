@@ -3,6 +3,8 @@ import styles from './Post.module.css'
 import {deletePost, fetchCommentsByPost, fetchPosts} from "../../service/postAPI";
 import {useAuth} from "../../auth";
 import CommentsModal from "../modals/CommentsModal";
+import {useNavigate} from "react-router-dom";
+import {PROFILE_ROUTE} from "../../routing/paths";
 
 const Post = ({post}) => {
     const {currentUser} = useAuth();
@@ -11,6 +13,12 @@ const Post = ({post}) => {
         else alert("У вас нет прав на удаление данного поста.")
     }
     const [commentsVisible, setCommentsVisible] = useState(false)
+
+    const navigate = useNavigate();
+
+    const handleUserClick = (user) => {
+        navigate(PROFILE_ROUTE + '/' + user.id)
+    }
 
     const parseTimestamp = (unixTime) => {
         const date = new Date(unixTime); // Преобразуем unix время в объект Date
@@ -35,7 +43,7 @@ const Post = ({post}) => {
         <>
         <div className={styles.container}>
             <button onClick={() => handleDelete()}>×</button>
-            <div className={styles.userName}>
+            <div className={styles.userName} onClick={() => handleUserClick(post.author)}>
                 <img width={40} height={40} src={process.env.REACT_APP_API_URL + post.author.profile_img}/>
                 <p>{post.author.firstname + ' ' + post.author.lastname}</p>
             </div>
@@ -45,8 +53,8 @@ const Post = ({post}) => {
             {post.images.map((image) =>
                 <img key={image} width={400} height={400} src={process.env.REACT_APP_API_URL + image}/>
             )}
-            <button onClick={() => setCommentsVisible(true)}>comments</button>
-            <button>likes</button>
+            <p onClick={() => setCommentsVisible(true)}>comments</p>
+            <p>{post.likes.length} likes</p>
         </div>
             <CommentsModal
                 show={commentsVisible}

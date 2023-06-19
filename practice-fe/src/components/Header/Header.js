@@ -16,7 +16,7 @@ const Header = () => {
             <div className={styles.headerLogo} onClick={() => navigate(MAIN_ROUTE)}>SUPER NAME</div>
             <div>
                 {isAuth ?
-                    <p className={styles.headerLogo} onClick={() => navigate(PROFILE_ROUTE)}>{currentUser.firstname + ' ' + currentUser.lastname}</p>
+                    <p className={styles.headerLogo} onClick={() => navigate(PROFILE_ROUTE + '/' + currentUser.id)}>{currentUser.firstname + ' ' + currentUser.lastname}</p>
                     :
                     <></>
                 }
