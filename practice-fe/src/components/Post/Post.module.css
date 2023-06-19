@@ -1,8 +1,8 @@
 
 
 .container {
-    width: 800px;
-    height: 800px;
+    max-width: 800px;
+    max-height: 800px;
     margin-left: 100px;
     margin-right: 100px;
     border: 2px solid black
@@ -12,7 +12,52 @@
     margin-top: 100px;
 }
 
-.userName {
+.userNameContainer {
     display: flex;
-    margin: 5px 5px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.userNameItem + .userNameItem {
+    margin-left: 10px;
+}
+
+.postCloseBtn {
+    margin-top: 25px;
+    margin-right: 15px;
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #818182;
+}
+
+.postFooter {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 2px solid #818182;
+}
+
+.postFooterItem {
+    margin-right: 10px;
+}
+
+.postBody {
+    margin: 10px;
+}
+
+.postSlider {
+    margin-left: 10px;
+}
+
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.sliderArrow {
+    font-size: 30px;
+    margin: 170px 10px 0px 10px;
 }

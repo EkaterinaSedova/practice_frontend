@@ -6,6 +6,8 @@ import CommentsModal from "../modals/CommentsModal";
 import {useNavigate} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../routing/paths";
 import {BsChatText, BsFillHeartFill, BsXCircle} from 'react-icons/bs';
+import Slider from "react-slick";
+import PostSlider from "./PostSlider";
 
 const Post = ({post}) => {
     const {currentUser} = useAuth();
@@ -43,20 +45,36 @@ const Post = ({post}) => {
     return (
         <>
         <div className={styles.container}>
-            <p onClick={() => handleDelete()}><BsXCircle/></p>
-            <div className={styles.userName} onClick={() => handleUserClick(post.author)}>
-                <img width={40} height={40} src={process.env.REACT_APP_API_URL + post.author.profile_img}/>
-                <p>{post.author.firstname + ' ' + post.author.lastname}</p>
+            <div className={styles.postHeader}>
+                <div className={styles.userNameContainer} onClick={() => handleUserClick(post.author)}>
+                    <img
+                        className={styles.userNameItem}
+                        width={60} height={60}
+                        src={process.env.REACT_APP_API_URL + post.author.profile_img}
+                    />
+                    <p className={styles.userNameItem}>
+                        {post.author.firstname + ' ' + post.author.lastname}
+                        <br/>
+                        {parseTimestamp(post.createdAt)}
+                    </p>
+                </div>
+                <p className={styles.postCloseBtn} onClick={() => handleDelete()}><BsXCircle/></p>
+            </div>
+            <p className={styles.postBody}>{post.content}</p>
+            <div className={styles.postSlider}>
+                <PostSlider images={post.images}>
+
+                </PostSlider>
             </div>
 
-            <p>{parseTimestamp(post.createdAt)}</p>
-            <p>{post.content}</p>
-            {post.images.map((image) =>
-                <img key={image} width={400} height={400} src={process.env.REACT_APP_API_URL + image}/>
-            )}
-            <p onClick={() => setCommentsVisible(true)}><BsChatText/> comments</p>
-            <div>
-                <p><BsFillHeartFill/> {post.likes.length} likes</p>
+            <div className={styles.postFooter}>
+                <p className={styles.postFooterItem}
+                   onClick={() => setCommentsVisible(true)}>
+                    <BsChatText/> comments
+                </p>
+                <div className={styles.postFooterItem}>
+                    <p><BsFillHeartFill/> {post.likes.length} likes</p>
+                </div>
             </div>
 
         </div>
