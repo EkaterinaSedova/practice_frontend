@@ -57,7 +57,21 @@
     justify-content: center;
 }
 
-.sliderArrow {
+.sliderArrowLeft {
+    position: absolute;
     font-size: 30px;
-    margin: 170px 10px 0px 10px;
+    margin-top: 20%;
+    left: 400px;
+}
+
+.sliderArrowRight {
+    position: absolute;
+    font-size: 30px;
+    margin-top: 20%;
+    right: 400px;
+}
+
+.images {
+    max-width: 600px;
+    max-height: 600px;
 }

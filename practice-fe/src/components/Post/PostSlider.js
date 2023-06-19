@@ -16,15 +16,15 @@ const PostSlider = ({images}) => {
     }
     if (images.length === 1) return (
         <div className={styles.sliderContainer}>
-            <img width={400} height={400} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
+            <img className={styles.images} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
         </div>
     )
     return (
         <div>
             <div className={styles.sliderContainer}>
-                <p className={styles.sliderArrow} onClick={() => handlePrevClick()}><BsArrowLeftCircle/></p>
-                <img width={400} height={400} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
-                <p className={styles.sliderArrow} onClick={() => handleNextClick()}><BsArrowRightCircle/></p>
+                <p className={styles.sliderArrowLeft} onClick={() => handlePrevClick()}><BsArrowLeftCircle/></p>
+                <p className={styles.sliderArrowRight} onClick={() => handleNextClick()}><BsArrowRightCircle/></p>
+                <img className={styles.images} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
             </div>
             {images.map((image) =>
                 <div>
