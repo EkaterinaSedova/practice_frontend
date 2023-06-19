@@ -23,8 +23,9 @@ const PostSlider = ({images}) => {
         <div>
             <div className={styles.sliderContainer}>
                 <p className={styles.sliderArrowLeft} onClick={() => handlePrevClick()}><BsArrowLeftCircle/></p>
-                <p className={styles.sliderArrowRight} onClick={() => handleNextClick()}><BsArrowRightCircle/></p>
                 <img className={styles.images} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
+                <p className={styles.sliderArrowRight} onClick={() => handleNextClick()}><BsArrowRightCircle/></p>
+
             </div>
             {images.map((image) =>
                 <div>

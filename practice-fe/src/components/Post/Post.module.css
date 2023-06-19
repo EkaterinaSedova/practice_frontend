@@ -2,10 +2,11 @@
 
 .container {
     max-width: 800px;
-    max-height: 800px;
+    max-height: 1000px;
     margin-left: 100px;
     margin-right: 100px;
-    border: 2px solid black
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 .container + .container {
@@ -55,20 +56,25 @@
 .sliderContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .sliderArrowLeft {
-    position: absolute;
+
     font-size: 30px;
-    margin-top: 20%;
     left: 400px;
+    padding: 9px 9px 0 9px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .sliderArrowRight {
-    position: absolute;
+
     font-size: 30px;
-    margin-top: 20%;
     right: 400px;
+    padding: 9px 9px 0 9px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .images {
