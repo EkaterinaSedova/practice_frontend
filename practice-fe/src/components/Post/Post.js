@@ -5,6 +5,7 @@ import {useAuth} from "../../auth";
 import CommentsModal from "../modals/CommentsModal";
 import {useNavigate} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../routing/paths";
+import {BsChatText, BsFillHeartFill, BsXCircle} from 'react-icons/bs';
 
 const Post = ({post}) => {
     const {currentUser} = useAuth();
@@ -42,7 +43,7 @@ const Post = ({post}) => {
     return (
         <>
         <div className={styles.container}>
-            <button onClick={() => handleDelete()}>×</button>
+            <p onClick={() => handleDelete()}><BsXCircle/></p>
             <div className={styles.userName} onClick={() => handleUserClick(post.author)}>
                 <img width={40} height={40} src={process.env.REACT_APP_API_URL + post.author.profile_img}/>
                 <p>{post.author.firstname + ' ' + post.author.lastname}</p>
@@ -53,8 +54,11 @@ const Post = ({post}) => {
             {post.images.map((image) =>
                 <img key={image} width={400} height={400} src={process.env.REACT_APP_API_URL + image}/>
             )}
-            <p onClick={() => setCommentsVisible(true)}>comments</p>
-            <p>{post.likes.length} likes</p>
+            <p onClick={() => setCommentsVisible(true)}><BsChatText/> comments</p>
+            <div>
+                <p><BsFillHeartFill/> {post.likes.length} likes</p>
+            </div>
+
         </div>
             <CommentsModal
                 show={commentsVisible}

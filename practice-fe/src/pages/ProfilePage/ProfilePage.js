@@ -28,36 +28,36 @@ const ProfilePage = () => {
 
 
 
-    return (
-        <>
+    return (<>
             <Header/>
-            <div>
-                <img height={400} width={400} src={process.env.REACT_APP_API_URL + user.profile_img}/>
-                <p>First Name: {user.firstname}</p>
-                <p>Last Name: {user.lastname}</p>
-                <p>Sex: {user.sex}</p>
-            </div>
-            {currentUser.id === user.id ?
-                <div>
-                    <button onClick={() => setEditModalVisible(true)}>Update my info</button>
-                </div>
-                :
-                <></>
-            }
-            {loading ?
-                <div>loading posts...</div>
+        {loading ?
+
+                    <div>loading...</div>
                 :
                 <>
-                    {posts.map((post) => <Post key={post.id} post={post}/>)}
+                    <div>
+                        <img height={400} width={400} src={process.env.REACT_APP_API_URL + user.profile_img}/>
+                        <p>First Name: {user.firstname}</p>
+                        <p>Last Name: {user.lastname}</p>
+                        <p>Sex: {user.sex}</p>
+                    </div>
+                    {currentUser.id === user.id ?
+                        <div>
+                            <button onClick={() => setEditModalVisible(true)}>Update my info</button>
+                        </div>
+                        :
+                        <></>
+                    }
+                    <>
+                        {posts.map((post) => <Post key={post.id} post={post}/>)}
+                    </>
+                    <EditProfile
+                        show={editModalVisible}
+                        onClose={() => setEditModalVisible(false)}
+                    />
                 </>
-
-            }
-            <EditProfile
-                show={editModalVisible}
-                onClose={() => setEditModalVisible(false)}
-            />
+        }
         </>
-
     );
 };
 
