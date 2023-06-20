@@ -3,8 +3,14 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    width: 1000px;
     padding: 0px 30px;
     margin: 0 auto;
+    justify-content: center;
+}
+
+.createPost {
+    margin-top: 50px;
+    display: flex;
     justify-content: center;
 }

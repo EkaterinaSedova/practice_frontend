@@ -14,6 +14,10 @@ const PostSlider = ({images}) => {
         if(currentIndex === images.length - 1) setCurrentIndex(0);
         else setCurrentIndex(currentIndex + 1);
     }
+    if (images.length === 0) return (
+        <div>
+        </div>
+    )
     if (images.length === 1) return (
         <div className={styles.sliderContainer}>
             <img className={styles.images} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>

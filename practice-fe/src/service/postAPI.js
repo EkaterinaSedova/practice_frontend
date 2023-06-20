@@ -16,9 +16,8 @@ export const deletePost = async (id) => {
         console.log(data)
 }
 
-/* export const fetchCommentsByPost = async (post_id) => {
-        const {data} = await $auth_host.get('/comments', {data: {post_id: post_id}})
-        console.log('hi from postAPI',data)
-        return data;
-} */
+export const createPost = async (post) => {
+        const {data} = await $auth_host.post('/posts', post)
+        console.log(data.message)
+}
 

@@ -10,6 +10,7 @@ import Slider from "react-slick";
 import PostSlider from "./PostSlider";
 import {createLike, deleteLike} from "../../service/likeAPI";
 import {fetchCommentsByPost} from "../../service/commentAPI";
+import CreatePostModal from "../modals/CreatePostModal";
 
 const Post = ({post}) => {
     const navigate = useNavigate();
