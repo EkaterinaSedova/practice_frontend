@@ -1,0 +1,39 @@
+.profileInfoContainer {
+    margin-left: 20px;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 20px;
+    color: #657d94
+}
+
+.profileInfoTextContainer {
+    margin-left: 20px;
+}
+
+.profileInfoText {
+    color: black
+}
+
+.profileInfoBtn {
+    cursor: pointer;
+    font-family: Abel;
+    margin: 10px;
+    font-size: 22px;
+    background: #4776a1;
+    border-radius: 10px;
+    border: none;
+    padding: 1px 20px;
+    color: #ffffff;
+}
+
+.profileImg {
+    min-width: 300px;
+    min-height: 300px;
+    max-height: 300px;
+    max-width: 400px;
+    border-radius: 20%;
+}
+
+.profilePosts {
+    margin-left: 15%;
+}

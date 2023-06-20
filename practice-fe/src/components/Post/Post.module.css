@@ -13,13 +13,21 @@
 
 
 .userNameContainer {
+    cursor: pointer;
     display: flex;
     margin-left: 15px;
     margin-top: 15px;
 }
 
-.userNameItem + .userNameItem {
+.userNameItem {
     margin-left: 10px;
+}
+
+.userNameImg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 1px solid #657d94;
 }
 
 .postCloseBtn {

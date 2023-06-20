@@ -60,7 +60,7 @@ const CommentsModal = ({show, onClose, comments, postId}) => {
                     {comments.map((comment) =>
                         <div className={styles.modalComment} key={comment.id}>
                             <img
-                                width={65} height={65}
+                                className={styles.modalCommentImg}
                                 src={process.env.REACT_APP_API_URL + comment.comment_author.profile_img}
                                 onClick={() => handleUserClick(comment.comment_author.id)}
                             />

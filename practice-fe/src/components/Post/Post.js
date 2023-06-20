@@ -98,8 +98,7 @@ const Post = ({post}) => {
             <div className={styles.postHeader}>
                 <div className={styles.userNameContainer} onClick={() => handleUserClick(post.author)}>
                     <img
-                        className={styles.userNameItem}
-                        width={60} height={60}
+                        className={styles.userNameImg}
                         src={process.env.REACT_APP_API_URL + post.author.profile_img}
                     />
                     <p className={styles.userNameItem}>
