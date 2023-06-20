@@ -78,6 +78,14 @@
 }
 
 .images {
-    max-width: 600px;
+    max-width: 750px;
     max-height: 600px;
+}
+
+.liked {
+    color: red;
+}
+
+.didntLiked {
+    color: black;
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import styles from './Post.module.css'
 import {deletePost, fetchCommentsByPost, fetchPosts} from "../../service/postAPI";
 import {useAuth} from "../../auth";
@@ -8,16 +8,53 @@ import {PROFILE_ROUTE} from "../../routing/paths";
 import {BsChatText, BsFillHeartFill, BsXCircle} from 'react-icons/bs';
 import Slider from "react-slick";
 import PostSlider from "./PostSlider";
+import {createLike, deleteLike} from "../../service/likeAPI";
 
 const Post = ({post}) => {
+    const navigate = useNavigate();
     const {currentUser} = useAuth();
+    const [liked, setLiked] = useState();
+    const [likeId, setLikeId] = useState();
+    const [commentsVisible, setCommentsVisible] = useState(false)
+
+    const initialState = post.likes.length;
+    const reducer = (state, action) => {
+        switch (action) {
+            case 'increment':
+                return state + 1;
+            case 'decrement':
+                return state - 1;
+            default:
+                return state;
+        }
+    }
+    const [count, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+        post.likes.map((like) => {
+            if (like.user_id === currentUser.id) {
+                setLiked(true);
+                setLikeId(like.id)
+            }
+        })
+    }, [])
+
+    const handleLikeClick = async () => {
+        if (liked === true) {
+            const data = await deleteLike(likeId)
+            dispatch('decrement')
+        } else {
+            const data = await createLike(currentUser.id, post.id)
+            setLikeId(data)
+            dispatch('increment')
+        }
+        setLiked(!liked);
+    }
+
     const handleDelete = () => {
         if(post.author.id === currentUser.id) deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
         else alert("У вас нет прав на удаление данного поста.")
     }
-    const [commentsVisible, setCommentsVisible] = useState(false)
-
-    const navigate = useNavigate();
 
     const handleUserClick = (user) => {
         navigate(PROFILE_ROUTE + '/' + user.id)
@@ -40,8 +77,8 @@ const Post = ({post}) => {
         let timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes}${ampm} `; // Собираем строку времени
         timeString += `${day} ${monthNames[month]} ${year}`
         return timeString
-
     }
+
     return (
         <>
         <div className={styles.container}>
@@ -73,7 +110,11 @@ const Post = ({post}) => {
                     <BsChatText/> comments
                 </p>
                 <div className={styles.postFooterItem}>
-                    <p><BsFillHeartFill/> {post.likes.length} likes</p>
+                    {liked ?
+                        <p className={styles.liked} onClick={() => handleLikeClick()}><BsFillHeartFill/> {count} likes</p>
+                        :
+                        <p className={styles.didntLiked} onClick={() => handleLikeClick()}><BsFillHeartFill/> {count} likes</p>
+                    }
                 </div>
             </div>
 

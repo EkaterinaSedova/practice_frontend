@@ -21,3 +21,4 @@ export const deletePost = async (id) => {
         console.log('hi from postAPI',data)
         return data;
 } */
+
