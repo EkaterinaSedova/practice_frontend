@@ -1,6 +1,6 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import styles from './Post.module.css'
-import {deletePost, fetchCommentsByPost, fetchPosts} from "../../service/postAPI";
+import {deletePost, fetchPosts} from "../../service/postAPI";
 import {useAuth} from "../../auth";
 import CommentsModal from "../modals/CommentsModal";
 import {useNavigate} from "react-router-dom";
@@ -9,6 +9,7 @@ import {BsChatText, BsFillHeartFill, BsXCircle} from 'react-icons/bs';
 import Slider from "react-slick";
 import PostSlider from "./PostSlider";
 import {createLike, deleteLike} from "../../service/likeAPI";
+import {fetchCommentsByPost} from "../../service/commentAPI";
 
 const Post = ({post}) => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Post = ({post}) => {
     const [liked, setLiked] = useState();
     const [likeId, setLikeId] = useState();
     const [commentsVisible, setCommentsVisible] = useState(false)
+    const [comments, setComments] = useState([])
 
     const initialState = post.likes.length;
     const reducer = (state, action) => {
@@ -38,6 +40,16 @@ const Post = ({post}) => {
             }
         })
     }, [])
+
+    const handleCommentClick = async () => {
+        console.log(post.id)
+        const data = await fetchCommentsByPost(post.id);
+
+        setComments(data)
+    }
+
+
+
 
     const handleLikeClick = async () => {
         if (liked === true) {
@@ -106,7 +118,7 @@ const Post = ({post}) => {
 
             <div className={styles.postFooter}>
                 <p className={styles.postFooterItem}
-                   onClick={() => setCommentsVisible(true)}>
+                   onClick={() => {handleCommentClick().then(r => setCommentsVisible(true));}}>
                     <BsChatText/> comments
                 </p>
                 <div className={styles.postFooterItem}>
@@ -122,7 +134,8 @@ const Post = ({post}) => {
             <CommentsModal
                 show={commentsVisible}
                 onClose={() => setCommentsVisible(false)}
-                comments={post.comments}
+                comments={comments}
+                postId={post.id}
             />
         </>
     );

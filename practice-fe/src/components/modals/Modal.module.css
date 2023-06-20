@@ -57,7 +57,7 @@
 }
 
 .input {
-    width: 70%;
+    width: 50%;
     margin: auto 10px;
 }
 
@@ -74,6 +74,29 @@
 }
 
 .modalComment {
-    padding: 10px 0px;
+    display: flex;
+    align-items: center;
     border-top: 1px solid #E5E5EA;
+}
+
+.modalCommentContent {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+.modalCommentTime {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.deleteBtn {
+    cursor: pointer;
+    font-size: 10px;
+    margin: -5px -5px -5px 370px;
+    padding: 0;
+}
+
+.user {
+    display: flex;
 }

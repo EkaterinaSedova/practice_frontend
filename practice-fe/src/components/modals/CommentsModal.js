@@ -1,7 +1,53 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Modal.module.css'
+import {deletePost, fetchPosts} from "../../service/postAPI";
+import {createComment, deleteComment, fetchCommentsByPost} from "../../service/commentAPI";
+import {PROFILE_ROUTE} from "../../routing/paths";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../auth";
+import {BsXCircle} from "react-icons/bs";
 
-const CommentsModal = ({show, onClose, comments}) => {
+const CommentsModal = ({show, onClose, comments, postId}) => {
+
+    const {currentUser} = useAuth();
+    const [currentComment, setCurrentComment] = useState('')
+
+    const navigate = useNavigate()
+
+    const handleDelete = async (comment) => {
+            if(comment.user_id === currentUser.id) await deleteComment(comment.id).then(r => {alert('Удалено.'); window.location.reload()});
+            else alert("У вас нет прав на удаление данного комментария.")
+    }
+    const handleUserClick = (id) => {
+        navigate(PROFILE_ROUTE + '/' + id)
+    }
+
+    const handleSendClick = async() => {
+        if(currentComment !== "") {
+            const data = await createComment(currentUser.id, postId, currentComment)
+            console.log(data)
+            onClose();
+        }
+    }
+
+    const parseTimestamp = (unixTime) => {
+        const date = new Date(unixTime); // Преобразуем unix время в объект Date
+        let hours = date.getHours(); // Получаем часы
+        const minutes = date.getMinutes(); // Получаем минуты
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const ampm = hours >= 12 ? 'PM' : 'AM'; // Получаем AM/PM
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        hours %= 12; // Приводим часы к 12-часовому формату
+        hours = hours || 12; // Если часы равны 0, то присваиваем значение 12
+
+        let timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes}${ampm} `; // Собираем строку времени
+        timeString += `${day} ${monthNames[month]} ${year}`
+        return timeString
+    }
 
     if (!show) return null;
     return (
@@ -13,11 +59,47 @@ const CommentsModal = ({show, onClose, comments}) => {
                 <div className={styles.modalBody}>
                     {comments.map((comment) =>
                         <div className={styles.modalComment} key={comment.id}>
-                            <p>{comment.content}</p>
+                            <img
+                                width={65} height={65}
+                                src={process.env.REACT_APP_API_URL + comment.comment_author.profile_img}
+                                onClick={() => handleUserClick(comment.comment_author.id)}
+                            />
+
+                            <div>
+                                <div className={styles.user}>
+                                    <div
+                                        className={styles.modalCommentContent}
+                                        onClick={() => handleUserClick(comment.comment_author.id)}
+                                    >
+                                        {comment.comment_author.firstname + ' ' + comment.comment_author.lastname}
+                                        <span
+                                             className={styles.modalCommentTime}
+                                         >
+                                            {parseTimestamp(comment.createdAt)}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className={styles.deleteBtn} onClick={() => handleDelete(comment)}>
+                                    <BsXCircle/>
+                                </div>
+                                <p
+                                    className={styles.modalCommentContent}
+                                >
+                                    {comment.content}
+                                </p>
+                            </div>
                         </div>
                     )}
                 </div>
                 <div className={styles.modalFooter}>
+                    <input
+                        className={styles.input}
+                        type='text'
+                        placeholder='leave comment'
+                        value={currentComment}
+                        onChange={e => {setCurrentComment(e.target.value)}}
+                    />
+                    <button className={styles.modalBtn} onClick={() => handleSendClick()}>Send</button>
                     <button className={styles.modalBtn} onClick={onClose}>Close</button>
                 </div>
             </div>
