@@ -7,12 +7,17 @@ import EditProfile from "../../components/modals/EditProfile";
 import {useParams} from "react-router-dom";
 import {getUserById} from "../../service/userAPI";
 import styles from './Profile.module.css'
+import {createSub, deleteSub} from "../../service/serviceAPI";
+import {createLike} from "../../service/likeAPI";
+import {BsPencilSquare} from "react-icons/bs";
+import CreatePostModal from "../../components/modals/CreatePostModal";
 
 const ProfilePage = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [buttonContent, setButtonContent] = useState('Add friend')
     const [editModalVisible, setEditModalVisible] = useState(false)
+    const [createPostVisible, setCreatePostVisible] = useState(false)
     const {currentUser} = useAuth();
     const [user, setUser] = useState({});
     const {id} = useParams();
@@ -21,19 +26,38 @@ const ProfilePage = () => {
         (async () => {
             const data = await fetchPostsByUser(id);
             setPosts(data);
-            const user = await getUserById(id)
-            setUser(user)
+            const candidate = await getUserById(id)
+            setUser(candidate)
+            currentUser.subscriptions.map((sub) => {
+                if(sub.subscriber_to_id === candidate.id) setButtonContent('Remove friend');
+            })
+
             setLoading(false)
         })()
     }, [])
 
+    const handleFriendClick = async () => {
+        switch (buttonContent) {
+            case 'Add friend': {
+                setButtonContent('Remove friend')
+                const data = await createSub(currentUser.id, id)
+                break;
+            }
+            case 'Remove friend': {
+                setButtonContent('Add friend')
+                deleteSub(currentUser.id, id).then()
+                break;
+            }
+        }
+    }
 
 
     return (<>
+
             <Header/>
         {loading ?
 
-                    <div>loading...</div>
+                    <div className={styles.loading}>loading...</div>
                 :
                 <div>
                     <div className={styles.profileInfoContainer}>
@@ -49,18 +73,30 @@ const ProfilePage = () => {
                                     <button className={styles.profileInfoBtn} onClick={() => setEditModalVisible(true)}>Update my info</button>
                                 </div>
                                 :
-                                <></>
+                                <div>
+                                    <button className={styles.profileInfoBtn} onClick={() => handleFriendClick()}>{buttonContent}</button>
+                                </div>
                             }
                         </div>
 
                     </div>
-
+                    <div
+                        onClick={() => setCreatePostVisible(true)}
+                        className={styles.createPost}
+                    >
+                        <BsPencilSquare/>
+                        <span className={styles.createPostText}>Create post</span>
+                    </div>
                     <div className={styles.profilePosts}>
                         {posts.map((post) => <Post key={post.id} post={post}/>)}
                     </div>
                     <EditProfile
                         show={editModalVisible}
                         onClose={() => setEditModalVisible(false)}
+                    />
+                    <CreatePostModal
+                        show={createPostVisible}
+                        onClose={() => setCreatePostVisible(false)}
                     />
                 </div>
         }

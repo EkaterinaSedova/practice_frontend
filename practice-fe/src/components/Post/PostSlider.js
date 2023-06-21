@@ -29,13 +29,8 @@ const PostSlider = ({images}) => {
                 <p className={styles.sliderArrowLeft} onClick={() => handlePrevClick()}><BsArrowLeftCircle/></p>
                 <img className={styles.images} src={process.env.REACT_APP_API_URL + images[currentIndex]}/>
                 <p className={styles.sliderArrowRight} onClick={() => handleNextClick()}><BsArrowRightCircle/></p>
-
             </div>
-            {images.map((image) =>
-                <div>
 
-                </div>
-            )}
         </div>
     );
 };

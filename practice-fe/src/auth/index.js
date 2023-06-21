@@ -17,7 +17,8 @@ function Auth ({ children }) {
         lastname: "",
         sex: "",
         profile_img: "",
-        createdAt: ""
+        createdAt: "",
+        subscriptions: []
     })
     const [isAuthChecked, setIsAuthChecked] = useState(false);
 

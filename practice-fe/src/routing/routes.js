@@ -14,15 +14,15 @@ export const publicRoutes = [
         path: REGISTRATION_ROUTE,
         Component: RegistrationPage,
     },
-    {
-        path: MAIN_ROUTE,
-        Component: MainPage,
-    },
 ]
 
 export const authRoutes = [
     {
         path: PROFILE_ROUTE + '/:id',
         Component: ProfilePage
-    }
+    },
+    {
+        path: MAIN_ROUTE,
+        Component: MainPage,
+    },
 ]

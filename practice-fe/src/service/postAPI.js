@@ -21,3 +21,8 @@ export const createPost = async (post) => {
         console.log(data.message)
 }
 
+export const fetchPostsFromSubscriptions = async (id) => {
+        const {data} = await $auth_host.get('/posts/subscriptions/' + id);
+        return data;
+}
+

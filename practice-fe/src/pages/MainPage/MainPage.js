@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import Header from "../../components/Header/Header";
 import styles from './Main.module.css';
-import {fetchPosts} from "../../service/postAPI";
+import {fetchPosts, fetchPostsFromSubscriptions} from "../../service/postAPI";
 import Post from "../../components/Post/Post";
 import {BsPencilSquare} from 'react-icons/bs'
 import CreatePostModal from "../../components/modals/CreatePostModal";
+import {useAuth} from "../../auth";
 
 const MainPage = () => {
+
+    const {currentUser} = useAuth();
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [createPostVisible, setCreatePostVisible] = useState(false)
+    const [btnStyleAll, setBtnStyleAll] = useState(styles.chooseButtonActive)
+    const [btnStyleFriends, setBtnStyleFriends] = useState(styles.chooseButton)
 
     useEffect(() => {
         (async () => {
@@ -20,20 +25,39 @@ const MainPage = () => {
         })()
     }, [])
 
+    const handleAllClick = () => {
+        window.location.reload()
+        setBtnStyleAll(styles.chooseButtonActive);
+        setBtnStyleFriends(styles.chooseButton);
+    }
+
+    const handleFriendsClick = async () => {
+        setLoading(true)
+        const data = await fetchPostsFromSubscriptions(currentUser.id);
+        setPosts(data)
+        setBtnStyleFriends(styles.chooseButtonActive)
+        setBtnStyleAll(styles.chooseButton)
+        setLoading(false)
+    }
+
     return (
         <>
 
             <Header/>
             { loading ?
-                <div>loading</div>
+                <div className={styles.loading}>loading...</div>
                 :
                 <div>
+                    <div className={styles.chooseBlock}>
+                        <span className={btnStyleAll} onClick={() => handleAllClick()}>All posts</span>
+                        <span className={btnStyleFriends} onClick={() => handleFriendsClick()}>My friends' posts</span>
+                    </div>
                     <div
                         onClick={() => setCreatePostVisible(true)}
                         className={styles.createPost}
                     >
                         <BsPencilSquare/>
-                        <span>Create post</span>
+                        <span className={styles.createPostText}>Create post</span>
                     </div>
                     <div className={styles.container}>
 

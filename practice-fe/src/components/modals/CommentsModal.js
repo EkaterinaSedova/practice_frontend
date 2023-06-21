@@ -25,7 +25,7 @@ const CommentsModal = ({show, onClose, comments, postId}) => {
     const handleSendClick = async() => {
         if(currentComment !== "") {
             const data = await createComment(currentUser.id, postId, currentComment)
-            console.log(data)
+            setCurrentComment('');
             onClose();
         }
     }
