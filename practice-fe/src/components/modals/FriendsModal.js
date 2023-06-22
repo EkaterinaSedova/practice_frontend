@@ -34,6 +34,22 @@ const FriendsModal = ({show, onClose, subcriptions}) => {
 
     if (!show) return null;
 
+    if (friends.length === 0) return (
+        <div className={styles.modal}>
+            <div className={styles.modalContent}>
+                <div className={styles.modalHeader}>
+                    <h4 className={styles.modalTitle}>Friends</h4>
+                </div>
+                <div className={styles.modalBody}>
+                    No friends yet.
+                </div>
+                <div className={styles.modalFooter}>
+                    <button className={styles.modalBtn} onClick={onClose}>Close</button>
+                </div>
+            </div>
+        </div>
+    )
+
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>

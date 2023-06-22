@@ -1,11 +1,8 @@
-
-
-
 .profileInfoContainer {
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 5%;
+    margin-left: 5%;
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
     font-size: 20px;
     color: #657d94
 }
@@ -32,16 +29,16 @@
 }
 
 .profileImg {
-    min-width: 300px;
-    min-height: 300px;
-    max-height: 300px;
-    max-width: 400px;
+    display: flex;
+    min-width: 50px;
+    min-height: 50px;
+    max-height: 270px;
+    max-width: 270px;
     border-radius: 20%;
 }
 
 .profilePosts {
-    width: 1000px;
-    padding: 0px 30px;
+    max-width: 1000px;
     margin: 0 auto;
     justify-content: center;
 }

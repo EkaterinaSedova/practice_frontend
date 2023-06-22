@@ -3,8 +3,8 @@ import styles from './Modal.module.css'
 import {useAuth} from "../../auth";
 import {updateUser} from "../../service/userAPI";
 const EditProfile = ({show, onClose}) => {
-    const [maleStyle, setMaleStyle] = useState(styles.modalA);
-    const [femaleStyle, setFemaleStyle] = useState(styles.modalA)
+    const [maleStyle, setMaleStyle] = useState(styles.modalChooseSexButton);
+    const [femaleStyle, setFemaleStyle] = useState(styles.modalChooseSexButton)
 
     const {currentUser} = useAuth();
     const [firstName, setFirstName] = useState(currentUser.firstname);
@@ -16,8 +16,8 @@ const EditProfile = ({show, onClose}) => {
     }
 
     useEffect(() => {
-        if(sex === 'female') setFemaleStyle(styles.modalB);
-        else setMaleStyle(styles.modalB);
+        if(sex === 'female') setFemaleStyle(styles.modalChooseSexButtonActive);
+        else setMaleStyle(styles.modalChooseSexButtonActive);
     }, [])
     const handleEdit = () => {
         const formData = new FormData();
@@ -32,14 +32,14 @@ const EditProfile = ({show, onClose}) => {
     }
 
     const handleClickMale = () => {
-        setFemaleStyle(styles.modalA)
-        setMaleStyle(styles.modalB)
+        setFemaleStyle(styles.modalChooseSexButton)
+        setMaleStyle(styles.modalChooseSexButtonActive)
         setSex('male')
     }
 
     const handleClickFemale = () => {
-        setMaleStyle(styles.modalA)
-        setFemaleStyle(styles.modalB)
+        setMaleStyle(styles.modalChooseSexButton)
+        setFemaleStyle(styles.modalChooseSexButtonActive)
         setSex('female')
     }
 
@@ -54,7 +54,7 @@ const EditProfile = ({show, onClose}) => {
                     <div className={styles.modalBodyBlock}>
                         Profile FirstName:
                         <input
-                            className={styles.input}
+                            className={styles.modalInput}
                             type='text'
                             value={firstName}
                             onChange={e => setFirstName(e.target.value)}
@@ -63,7 +63,7 @@ const EditProfile = ({show, onClose}) => {
                     <div className={styles.modalBodyBlock}>
                         Profile LastName:
                         <input
-                            className={styles.input}
+                            className={styles.modalInput}
                             type='text'
                             value={lastName}
                             onChange={e => setLastName(e.target.value)}
@@ -76,7 +76,7 @@ const EditProfile = ({show, onClose}) => {
                     </div>
                     <div className={styles.modalBodyBlock}>
                         Avatar:
-                        <input className={styles.input}
+                        <input className={styles.modalInput}
                                type='file'
                                onChange={selectFile}
                         />

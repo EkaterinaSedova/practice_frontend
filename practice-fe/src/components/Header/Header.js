@@ -41,10 +41,15 @@ const Header = () => {
                     <></>
                 }
             </div>
-            <div className={styles.headerComponent}>
+            <div>
                 {isAuth ?
                     <>
-                        <p onClick={() => {logout(); navigate(LOGIN_ROUTE)}}>exit</p>
+                        <p
+                            className={styles.headerComponent}
+                            onClick={() => {logout(); navigate(LOGIN_ROUTE)}}
+                        >
+                            Exit
+                        </p>
                     </>
                     :
                     <></>

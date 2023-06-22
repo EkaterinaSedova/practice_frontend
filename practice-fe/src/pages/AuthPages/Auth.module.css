@@ -30,13 +30,12 @@
 }
 
 .contentBlock {
-    font-family: Abel;
-    justify-content: center;
     display: flex;
     flex-direction: column;
+    margin: 50px;
     align-items: center;
-    margin-top: 50px;
 }
+
 
 .btn {
 

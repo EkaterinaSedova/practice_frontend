@@ -12,7 +12,8 @@
 }
 
 .modalContent {
-    width: 500px;
+    min-width: 325px;
+    max-width: 500px;
     background-color: white;
     border-radius: 10px;
 }
@@ -21,10 +22,14 @@
     margin: 0;
 }
 
-.modalHeader, .modalFooter {
+.modalHeader {
     padding: 10px;
-    align-items: center;
-    justify-content: space-between;
+}
+
+.modalFooter {
+    padding: 3px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .modalBody {
@@ -40,12 +45,12 @@
 .modalBtn {
     cursor: pointer;
     font-family: Abel;
-    margin: 10px;
+    margin: 5px;
     font-size: 22px;
     background: #4776a1;
     border-radius: 10px;
     border: none;
-    padding: 1px 20px;
+    padding: 1px 10px;
     color: #ffffff;
 }
 
@@ -56,17 +61,18 @@
     margin-top: 50px;
 }
 
-.input {
-    width: 50%;
+.modalInput {
+
+    min-width: 150px;
     margin: auto 10px;
 }
 
-.modalA {
+.modalChooseSexButton {
     margin: 0px 5px;
     padding: 5px 5px;
 }
 
-.modalB {
+.modalChooseSexButtonActive {
     margin: 0px 5px;
     padding: 5px 5px;
     border: 2px solid red;
@@ -75,6 +81,7 @@
 
 .modalComment {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     border-top: 1px solid #E5E5EA;
     border-bottom: 1px solid #E5E5EA;
@@ -85,7 +92,7 @@
 }
 
 .modalCommentContent {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 10px;
 }
 
@@ -98,8 +105,7 @@
 .deleteBtn {
     cursor: pointer;
     font-size: 10px;
-    margin: -5px -5px -5px 370px;
-    padding: 0;
+    padding: 20px 0px 0px 20px;
 }
 
 .user {
@@ -118,16 +124,18 @@
 .userNameContainer {
     cursor: pointer;
     display: flex;
+    align-items: center;
 }
 
 .userNameItem {
     margin-left: 10px;
+    font-size: 20px;
 }
 
 .userNameImg {
-    margin-top: 3px;
-    width: 45px;
-    height: 45px;
+    margin: 5px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: 1px solid #657d94;
+    border: 1px solid #71898b;
 }

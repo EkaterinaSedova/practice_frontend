@@ -19,7 +19,7 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                 comment.user_id === currentUser.id || postAuthorId === currentUser.id
             ) await deleteComment(comment.id).then(r => {
                 alert('Удалено.');
-                window.location.reload()
+                onClose();
             });
             else alert("У вас нет прав на удаление данного комментария.")
     }
@@ -55,6 +55,31 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
     }
 
     if (!show) return null;
+
+    if (comments.length === 0) return (
+        <div className={styles.modal}>
+            <div className={styles.modalContent}>
+                <div className={styles.modalHeader}>
+                    <h4 className={styles.modalTitle}>Comments</h4>
+                </div>
+                <div className={styles.modalBody}>
+                    <div>No comments yet</div>
+                </div>
+                <div className={styles.modalFooter}>
+                    <input
+                        className={styles.input}
+                        type='text'
+                        placeholder='leave comment'
+                        value={currentComment}
+                        onChange={e => {setCurrentComment(e.target.value)}}
+                    />
+                    <button className={styles.modalBtn} onClick={() => handleSendClick()}>Send</button>
+                    <button className={styles.modalBtn} onClick={onClose}>Close</button>
+                </div>
+            </div>
+        </div>
+    )
+
     return (
         <div className={styles.modal}>
             <div className={styles.modalContent}>
@@ -83,9 +108,7 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                                             {parseTimestamp(comment.createdAt)}
                                         </span>
                                     </div>
-                                </div>
-                                <div className={styles.deleteBtn} onClick={() => handleDelete(comment)}>
-                                    <BsXCircle/>
+                                    <BsXCircle className={styles.deleteBtn}/>
                                 </div>
                                 <p
                                     className={styles.modalCommentContent}
@@ -98,7 +121,7 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                 </div>
                 <div className={styles.modalFooter}>
                     <input
-                        className={styles.input}
+                        className={styles.modalInput}
                         type='text'
                         placeholder='leave comment'
                         value={currentComment}
