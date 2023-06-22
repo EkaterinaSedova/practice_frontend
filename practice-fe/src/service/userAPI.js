@@ -7,5 +7,4 @@ export const getUserById = async (id) => {
 
 export const updateUser = async (user) => {
     const {data} = await $auth_host.post('users/update', user)
-    console.log(data.message)
 }

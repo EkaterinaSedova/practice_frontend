@@ -5,7 +5,6 @@ export const deleteSub = async (subId, subToId) => {
             subscriber_id: subId,
             subscriber_to_id: subToId
         }})
-    console.log(data)
 }
 
 export const createSub = async (subId, subToId) => {

@@ -43,9 +43,7 @@ const Post = ({post}) => {
     }, [])
 
     const handleCommentClick = async () => {
-        console.log(post.id)
         const data = await fetchCommentsByPost(post.id);
-
         setComments(data)
     }
 

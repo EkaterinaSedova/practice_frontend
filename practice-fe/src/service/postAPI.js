@@ -13,12 +13,10 @@ export const fetchPostsByUser = async (id) => {
 
 export const deletePost = async (id) => {
         const {data} = await $auth_host.delete('/posts', {data: {post_id: id}})
-        console.log(data)
 }
 
 export const createPost = async (post) => {
         const {data} = await $auth_host.post('/posts', post)
-        console.log(data.message)
 }
 
 export const fetchPostsFromSubscriptions = async (id) => {

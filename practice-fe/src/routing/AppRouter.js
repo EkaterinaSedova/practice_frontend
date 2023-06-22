@@ -6,7 +6,6 @@ import {useAuth} from "../auth";
 
 const AppRouter = () => {
     const {isAuth} = useAuth()
-    console.log(isAuth)
     return (
         <Routes>
             {publicRoutes.map(({path, Component}) =>

@@ -25,10 +25,13 @@ const MainPage = () => {
         })()
     }, [])
 
-    const handleAllClick = () => {
-        window.location.reload()
+    const handleAllClick = async () => {
+        setLoading(true)
+        const data = await fetchPosts();
+        setPosts(data);
         setBtnStyleAll(styles.chooseButtonActive);
         setBtnStyleFriends(styles.chooseButton);
+        setLoading(false)
     }
 
     const handleFriendsClick = async () => {

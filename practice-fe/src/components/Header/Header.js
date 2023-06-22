@@ -20,7 +20,7 @@ const Header = () => {
             </div>
             <div>
                 {isAuth ?
-                    <p className={styles.headerLogo}
+                    <div className={styles.headerLogo}
                        onClick={() => {
                            navigate(PROFILE_ROUTE + '/' + currentUser.id)
                            window.location.reload()
@@ -36,7 +36,7 @@ const Header = () => {
                                 {currentUser.firstname + ' ' + currentUser.lastname}
                             </p>
                         </div>
-                    </p>
+                    </div>
                     :
                     <></>
                 }
