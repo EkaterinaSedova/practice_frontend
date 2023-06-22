@@ -3,6 +3,7 @@ import styles from './Header.module.css'
 import {useAuth} from "../../auth";
 import {useNavigate} from "react-router-dom";
 import {LOGIN_ROUTE, MAIN_ROUTE, PROFILE_ROUTE} from "../../routing/paths";
+import {BsFillHouseDoorFill} from 'react-icons/bs'
 
 const Header = () => {
     const {isAuth} = useAuth();
@@ -13,7 +14,10 @@ const Header = () => {
 
     return (
         <header className={styles.headerBlock}>
-            <div className={styles.headerLogo} onClick={() => navigate(MAIN_ROUTE)}>SUPER NAME</div>
+            <div className={styles.headerLogo} onClick={() => navigate(MAIN_ROUTE)}>
+                <BsFillHouseDoorFill className={styles.headerLogoIcon}/>
+                <span>HOME</span>
+            </div>
             <div>
                 {isAuth ?
                     <p className={styles.headerLogo}
@@ -23,7 +27,15 @@ const Header = () => {
                        }
                     }
                     >
-                        {currentUser.firstname + ' ' + currentUser.lastname}
+                        <div className={styles.userNameContainer}>
+                            <img
+                                className={styles.userNameImg}
+                                src={process.env.REACT_APP_API_URL + currentUser.profile_img}
+                            />
+                            <p className={styles.userNameItem}>
+                                {currentUser.firstname + ' ' + currentUser.lastname}
+                            </p>
+                        </div>
                     </p>
                     :
                     <></>
@@ -35,7 +47,7 @@ const Header = () => {
                         <p onClick={() => {logout(); navigate(LOGIN_ROUTE)}}>exit</p>
                     </>
                     :
-                    <p onClick={() => navigate(LOGIN_ROUTE)}>login</p>
+                    <></>
                 }
 
             </div>

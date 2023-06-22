@@ -2,6 +2,7 @@
 
 
 .profileInfoContainer {
+    margin-top: 20px;
     margin-left: 20px;
     display: flex;
     justify-content: flex-start;
@@ -14,6 +15,7 @@
 }
 
 .profileInfoText {
+    margin-left: 5px;
     color: black
 }
 

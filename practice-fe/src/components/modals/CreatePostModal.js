@@ -3,7 +3,7 @@ import styles from './Modal.module.css'
 import {useAuth} from "../../auth";
 import {updateUser} from "../../service/userAPI";
 import {createPost} from "../../service/postAPI";
-const EditProfile = ({show, onClose}) => {
+const CreatePostModal = ({show, onClose}) => {
 
     const [postContent, setPostContent] = useState('')
     const {currentUser} = useAuth();
@@ -66,4 +66,4 @@ const EditProfile = ({show, onClose}) => {
     );
 };
 
-export default EditProfile;
+export default CreatePostModal;

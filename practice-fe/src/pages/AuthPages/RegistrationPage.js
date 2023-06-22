@@ -59,7 +59,7 @@ const RegistrationPage = () => {
                 </div>
 
                 <div className={styles.textBlock}>
-                    LOGIN
+                    EMAIL
                 </div>
 
                 <div>
@@ -67,7 +67,7 @@ const RegistrationPage = () => {
                         className={styles.inputBlock}
                         value={user}
                         onChange={e => setUser(e.target.value)}
-                        placeholder=" login"
+                        placeholder=" email"
                     />
                 </div>
 
@@ -90,8 +90,6 @@ const RegistrationPage = () => {
                 </div>
                 <button className={styles.btn} onClick={() => handleRegister()}>REGISTRATION</button>
             </div>
-
-            <Footer/>
         </>
     );
 };

@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {useAuth} from "../../auth";
 import {BsXCircle} from "react-icons/bs";
 
-const CommentsModal = ({show, onClose, comments, postId}) => {
+const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
 
     const {currentUser} = useAuth();
     const [currentComment, setCurrentComment] = useState('')
@@ -15,7 +15,12 @@ const CommentsModal = ({show, onClose, comments, postId}) => {
     const navigate = useNavigate()
 
     const handleDelete = async (comment) => {
-            if(comment.user_id === currentUser.id) await deleteComment(comment.id).then(r => {alert('Удалено.'); window.location.reload()});
+            if(
+                comment.user_id === currentUser.id || postAuthorId === currentUser.id
+            ) await deleteComment(comment.id).then(r => {
+                alert('Удалено.');
+                window.location.reload()
+            });
             else alert("У вас нет прав на удаление данного комментария.")
     }
     const handleUserClick = (id) => {

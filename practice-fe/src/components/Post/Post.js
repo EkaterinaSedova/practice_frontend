@@ -49,9 +49,6 @@ const Post = ({post}) => {
         setComments(data)
     }
 
-
-
-
     const handleLikeClick = async () => {
         if (liked === true) {
             const data = await deleteLike(likeId)
@@ -65,8 +62,7 @@ const Post = ({post}) => {
     }
 
     const handleDelete = () => {
-        if(post.author.id === currentUser.id) deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
-        else alert("У вас нет прав на удаление данного поста.")
+        deletePost(post.id).then(r => {alert('Удалено.'); window.location.reload()});
     }
 
     const handleUserClick = (user) => {
@@ -74,20 +70,20 @@ const Post = ({post}) => {
     }
 
     const parseTimestamp = (unixTime) => {
-        const date = new Date(unixTime); // Преобразуем unix время в объект Date
-        let hours = date.getHours(); // Получаем часы
-        const minutes = date.getMinutes(); // Получаем минуты
+        const date = new Date(unixTime);
+        let hours = date.getHours();
+        const minutes = date.getMinutes();
         const day = date.getDate();
         const month = date.getMonth();
         const year = date.getFullYear();
-        const ampm = hours >= 12 ? 'PM' : 'AM'; // Получаем AM/PM
+        const ampm = hours >= 12 ? 'PM' : 'AM';
         const monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
-        hours %= 12; // Приводим часы к 12-часовому формату
-        hours = hours || 12; // Если часы равны 0, то присваиваем значение 12
+        hours %= 12;
+        hours = hours || 12;
 
-        let timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes}${ampm} `; // Собираем строку времени
+        let timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes}${ampm} `;
         timeString += `${day} ${monthNames[month]} ${year}`
         return timeString
     }
@@ -107,7 +103,12 @@ const Post = ({post}) => {
                         {parseTimestamp(post.createdAt)}
                     </p>
                 </div>
-                <p className={styles.postCloseBtn} onClick={() => handleDelete()}><BsXCircle/></p>
+                {post.author.id === currentUser.id ?
+                    <p className={styles.postCloseBtn} onClick={() => handleDelete()}><BsXCircle/></p>
+                    :
+                    <></>
+                }
+
             </div>
             <p className={styles.postBody}>{post.content}</p>
             <div className={styles.postSlider}>
@@ -136,6 +137,7 @@ const Post = ({post}) => {
                 onClose={() => setCommentsVisible(false)}
                 comments={comments}
                 postId={post.id}
+                postAuthorId={post.user_id}
             />
         </>
     );

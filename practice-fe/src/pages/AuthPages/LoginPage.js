@@ -25,10 +25,10 @@ const LoginPage = () => {
 
     return (
         <>
-        <Header/>
+            <Header/>
         <div className={styles.contentBlock}>
             <div className={styles.textBlock}>
-                LOGIN
+                EMAIL
             </div>
 
             <div>
@@ -36,7 +36,7 @@ const LoginPage = () => {
                     className={styles.inputBlock}
                     value={user}
                     onChange={e => setUser(e.target.value)}
-                    placeholder=" login"
+                    placeholder=" email"
                 />
             </div>
 
@@ -59,8 +59,6 @@ const LoginPage = () => {
             </div>
             <button className={styles.btn} onClick={() => handleLogin()}>LOGIN</button>
         </div>
-
-            <Footer/>
         </>
     );
 };

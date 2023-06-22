@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './Modal.module.css'
 import {useAuth} from "../../auth";
 import {updateUser} from "../../service/userAPI";
@@ -9,11 +9,16 @@ const EditProfile = ({show, onClose}) => {
     const {currentUser} = useAuth();
     const [firstName, setFirstName] = useState(currentUser.firstname);
     const [lastName, setLastName] = useState(currentUser.lastname);
-    const [sex, setSex] = useState('male');
+    const [sex, setSex] = useState(currentUser.sex);
     const [img, setImg] = useState(null);
     const selectFile = e => {
         setImg(e.target.files[0])
     }
+
+    useEffect(() => {
+        if(sex === 'female') setFemaleStyle(styles.modalB);
+        else setMaleStyle(styles.modalB);
+    }, [])
     const handleEdit = () => {
         const formData = new FormData();
         if (!img) setImg()
@@ -22,8 +27,8 @@ const EditProfile = ({show, onClose}) => {
         formData.append('lastname', lastName);
         formData.append('sex', sex);
         formData.append('profile_img', img);
-        window.location.reload()
         updateUser(formData).then(data => onClose());
+        window.location.reload()
     }
 
     const handleClickMale = () => {
