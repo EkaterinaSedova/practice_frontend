@@ -89,32 +89,40 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                 <div className={styles.modalBody}>
                     {comments.map((comment) =>
                         <div className={styles.modalComment} key={comment.id}>
-                            <img
-                                className={styles.modalCommentImg}
-                                src={process.env.REACT_APP_API_URL + comment.comment_author.profile_img}
-                                onClick={() => handleUserClick(comment.comment_author.id)}
-                            />
 
-                            <div>
-                                <div className={styles.user}>
-                                    <div
-                                        className={styles.modalCommentContent}
-                                        onClick={() => handleUserClick(comment.comment_author.id)}
-                                    >
-                                        {comment.comment_author.firstname + ' ' + comment.comment_author.lastname}
-                                        <span
-                                             className={styles.modalCommentTime}
-                                         >
-                                            {parseTimestamp(comment.createdAt)}
-                                        </span>
+                            <div className={styles.modalCommentContent}>
+                                    <img
+                                    className={styles.modalCommentImg}
+                                    src={process.env.REACT_APP_API_URL + comment.comment_author.profile_img}
+                                    onClick={() => handleUserClick(comment.comment_author.id)}
+                                    />
+                                    <div className={styles.modalCommentText}>
+                                        <div className={styles.user}>
+                                            <div
+                                                onClick={() => handleUserClick(comment.comment_author.id)}
+                                            >
+                                            <span>
+                                                {comment.comment_author.firstname + ' ' + comment.comment_author.lastname}
+                                            </span>
+                                                <span
+                                                    className={styles.modalCommentTime}
+                                                >
+                                                {parseTimestamp(comment.createdAt)}
+                                            </span>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                        >
+                                            {comment.content}
+                                        </div>
                                     </div>
-                                    <BsXCircle className={styles.deleteBtn}/>
-                                </div>
-                                <p
-                                    className={styles.modalCommentContent}
-                                >
-                                    {comment.content}
-                                </p>
+                            </div>
+                            <div
+                                className={styles.deleteBtn}
+                                onClick={() => handleDelete(comment)}
+                            >
+                                <BsXCircle/>
                             </div>
                         </div>
                     )}
