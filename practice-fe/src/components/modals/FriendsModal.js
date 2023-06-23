@@ -5,10 +5,11 @@ import {getUserById, updateUser} from "../../service/userAPI";
 import {createPost} from "../../service/postAPI";
 import {useNavigate} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../routing/paths";
+import {deleteSub} from "../../service/serviceAPI";
 
 const FriendsModal = ({show, onClose, subscriptions, isMyProfile}) => {
 
-    //const {currentUser} = useAuth();
+    const {currentUser} = useAuth();
 
     const [friends, setFriends] = useState([])
 
@@ -30,6 +31,9 @@ const FriendsModal = ({show, onClose, subscriptions, isMyProfile}) => {
         navigate(PROFILE_ROUTE + '/' + id);
         window.location.reload();
         onClose();
+    }
+    const handleRemoveClick = async (friendId) => {
+        await deleteSub(currentUser.id, friendId).then(r => window.location.reload())
     }
 
     if (!show) return null;
@@ -57,33 +61,40 @@ const FriendsModal = ({show, onClose, subscriptions, isMyProfile}) => {
                     <h4 className={styles.modalTitle}>Friends</h4>
                 </div>
                 <div className={styles.modalBody}>
-                    {friends.map((friend) =>
-                        <div
-                            className={styles.modalComment}
-                            key={friend.id}
-                            onClick={() => handleUserClick(friend.id)}
-                        >
-                            <div className={styles.userNameContainer}>
-                                <img
-                                    className={styles.userNameImg}
-                                    src={process.env.REACT_APP_API_URL + friend.profile_img}
-                                />
-                                <p className={styles.userNameItem}>
-                                    {friend.firstname + ' ' + friend.lastname}
-                                </p>
-                            </div>
-                            {isMyProfile ?
-                                <button className={styles.modalBtn}>
-                                    Remove friend
-                                </button>
-                                :
-                                <div>
-
+                    <div className={styles.modalFriendContainer}>
+                        {friends.map((friend) =>
+                            <div
+                                className={styles.modalComment}
+                                key={friend.id}
+                            >
+                                <div
+                                    className={styles.userNameContainer}
+                                    onClick={() => handleUserClick(friend.id)}
+                                >
+                                    <img
+                                        className={styles.userNameImg}
+                                        src={process.env.REACT_APP_API_URL + friend.profile_img}
+                                    />
+                                    <p className={styles.userNameItem}>
+                                        {friend.firstname + ' ' + friend.lastname}
+                                    </p>
                                 </div>
-                            }
-                        </div>
-                    )
-                    }
+                                {isMyProfile ?
+                                    <button
+                                        className={styles.modalRemoveBtn}
+                                        onClick={() => handleRemoveClick(friend.id)}
+                                    >
+                                        Remove<br/>friend
+                                    </button>
+                                    :
+                                    <div>
+
+                                    </div>
+                                }
+                            </div>
+                        )
+                        }
+                    </div>
                 </div>
                 <div className={styles.modalFooter}>
                     <button className={styles.modalBtn} onClick={onClose}>Close</button>

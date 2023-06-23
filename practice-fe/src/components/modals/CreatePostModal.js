@@ -43,8 +43,9 @@ const CreatePostModal = ({show, onClose}) => {
                     <div className={styles.modalBodyBlock}>
                         Content:
                         <input
-                            className={styles.input}
+                            className={styles.modalInput}
                             type='text'
+                            maxLength={255}
                             value={postContent}
                             onChange={e => setPostContent(e.target.value)}
                         />

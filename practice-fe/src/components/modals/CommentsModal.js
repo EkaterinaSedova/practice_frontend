@@ -67,8 +67,9 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                 </div>
                 <div className={styles.modalFooter}>
                     <input
-                        className={styles.input}
+                        className={styles.modalInput}
                         type='text'
+                        maxLength={255}
                         placeholder='leave comment'
                         value={currentComment}
                         onChange={e => {setCurrentComment(e.target.value)}}
@@ -131,6 +132,7 @@ const CommentsModal = ({show, onClose, comments, postId, postAuthorId}) => {
                     <input
                         className={styles.modalInput}
                         type='text'
+                        maxLength={255}
                         placeholder='leave comment'
                         value={currentComment}
                         onChange={e => {setCurrentComment(e.target.value)}}

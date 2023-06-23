@@ -16,8 +16,11 @@ const EditProfile = ({show, onClose}) => {
     }
 
     useEffect(() => {
+        if(sex === null) {
+            setSex('unknown');
+        }
         if(sex === 'female') setFemaleStyle(styles.modalChooseSexButtonActive);
-        else setMaleStyle(styles.modalChooseSexButtonActive);
+        if(sex === 'male') setMaleStyle(styles.modalChooseSexButtonActive);
     }, [])
     const handleEdit = () => {
         const formData = new FormData();
@@ -56,6 +59,7 @@ const EditProfile = ({show, onClose}) => {
                         <input
                             className={styles.modalInput}
                             type='text'
+                            maxLength={16}
                             value={firstName}
                             onChange={e => setFirstName(e.target.value)}
                         />
@@ -65,6 +69,7 @@ const EditProfile = ({show, onClose}) => {
                         <input
                             className={styles.modalInput}
                             type='text'
+                            maxLength={16}
                             value={lastName}
                             onChange={e => setLastName(e.target.value)}
                         />

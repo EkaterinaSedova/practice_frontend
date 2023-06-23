@@ -12,8 +12,11 @@
 }
 
 .modalContent {
-    min-width: 325px;
-    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    max-height: 70%;
+    max-width: 700px;
+    min-width: 40%;
     background-color: white;
     border-radius: 10px;
 }
@@ -134,20 +137,37 @@
 }
 
 .userNameContainer {
-    cursosr: pointer;
+    cursor: pointer;
     display: flex;
     align-items: center;
 }
 
 .userNameItem {
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .userNameImg {
     margin: 5px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: 1px solid #71898b;
+}
+
+.modalRemoveBtn {
+    cursor: pointer;
+    font-family: Abel;
+    margin: 10px 0px 10px 5px;
+    font-size: 18px;
+    background: #4776a1;
+    border-radius: 10px;
+    border: none;
+    color: #ffffff;
+}
+
+.modalFriendContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }

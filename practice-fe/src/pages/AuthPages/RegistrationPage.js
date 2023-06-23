@@ -19,8 +19,10 @@ const RegistrationPage = () => {
 
     const handleRegister = async () => {
         try {
-            await register(user, password, firstname, lastname)
-            navigate(MAIN_ROUTE)
+            if(firstname && lastname) {
+                await register(user, password, firstname, lastname);
+                navigate(MAIN_ROUTE);
+            } else alert("Имя и фамилия не должны быть пустыми.");
         } catch (e) {
             alert(e.response.data.message || e.response.data)
         }
