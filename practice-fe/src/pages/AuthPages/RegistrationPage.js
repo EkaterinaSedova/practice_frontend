@@ -43,6 +43,7 @@ const RegistrationPage = () => {
                         className={styles.inputBlock}
                         value={firstname}
                         onChange={e => setFirstname(e.target.value)}
+                        maxLength={16}
                         placeholder=" firstname"
                     />
                 </div>
@@ -54,6 +55,7 @@ const RegistrationPage = () => {
                 <div>
                     <input
                         className={styles.inputBlock}
+                        maxLength={16}
                         value={lastname}
                         onChange={e => setLastname(e.target.value)}
                         placeholder=" lastname"
