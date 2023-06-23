@@ -23,9 +23,11 @@ const ProfilePage = () => {
     const {currentUser} = useAuth();
     const [user, setUser] = useState({});
     const {id} = useParams();
+    const [isMyProfile, setIsMyProfile] = useState(false)
 
     useEffect(() => {
         (async () => {
+            if (currentUser.id == id) setIsMyProfile(true);
             const data = await fetchPostsByUser(id);
             setPosts(data);
             const candidate = await getUserById(id)
@@ -143,7 +145,8 @@ const ProfilePage = () => {
                     <FriendsModal
                         show={friendsModalVisible}
                         onClose={() => setFriendsModalVisible(false)}
-                        subcriptions={user.subscriptions}
+                        subscriptions={user.subscriptions}
+                        isMyProfile={isMyProfile}
                     />
                 </div>
         }

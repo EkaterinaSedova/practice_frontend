@@ -6,7 +6,7 @@ import {createPost} from "../../service/postAPI";
 import {useNavigate} from "react-router-dom";
 import {PROFILE_ROUTE} from "../../routing/paths";
 
-const FriendsModal = ({show, onClose, subcriptions}) => {
+const FriendsModal = ({show, onClose, subscriptions, isMyProfile}) => {
 
     //const {currentUser} = useAuth();
 
@@ -15,7 +15,7 @@ const FriendsModal = ({show, onClose, subcriptions}) => {
     useEffect(() => {
         (async () => {
             let users = [];
-            subcriptions.map(async (sub) => {
+            subscriptions.map(async (sub) => {
                 const user = await getUserById(sub.subscriber_to_id)
                 users.push(user)
             })
@@ -72,6 +72,15 @@ const FriendsModal = ({show, onClose, subcriptions}) => {
                                     {friend.firstname + ' ' + friend.lastname}
                                 </p>
                             </div>
+                            {isMyProfile ?
+                                <button className={styles.modalBtn}>
+                                    Remove friend
+                                </button>
+                                :
+                                <div>
+
+                                </div>
+                            }
                         </div>
                     )
                     }

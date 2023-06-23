@@ -49,9 +49,7 @@ function Auth ({ children }) {
                 try {
                     const token = jwt_decode(localStorage.getItem('token'))
                     const user = await getUserById(token.id)
-                    setIsAuth(true)
                     setCurrentUser(user)
-
                 } catch (e) {
                     logout();
                 }
