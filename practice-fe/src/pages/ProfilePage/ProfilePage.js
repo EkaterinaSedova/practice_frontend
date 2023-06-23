@@ -27,7 +27,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         (async () => {
-            if (currentUser.id == id) setIsMyProfile(true);
+            if (currentUser.id === Number(id)) setIsMyProfile(true);
             const data = await fetchPostsByUser(id);
             setPosts(data);
             const candidate = await getUserById(id)
@@ -90,7 +90,7 @@ const ProfilePage = () => {
                                     {user.sex}
                                 </span>
                             </p>
-                            {currentUser.id === user.id ?
+                            {isMyProfile ?
                                 <div>
                                     <button
                                         className={styles.profileInfoBtn}
@@ -124,13 +124,18 @@ const ProfilePage = () => {
                         </div>
 
                     </div>
-                    <div
-                        onClick={() => setCreatePostVisible(true)}
-                        className={styles.createPost}
-                    >
-                        <BsPencilSquare/>
-                        <span className={styles.createPostText}>Create post</span>
-                    </div>
+                    {isMyProfile ?
+                        <div
+                            onClick={() => setCreatePostVisible(true)}
+                            className={styles.createPost}
+                        >
+                            <BsPencilSquare/>
+                            <span className={styles.createPostText}>Create post</span>
+                        </div>
+                        :
+                        <></>
+                    }
+
                     <div className={styles.profilePosts}>
                         {posts.map((post) => <Post key={post.id} post={post}/>)}
                     </div>
